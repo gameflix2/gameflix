@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio - Gameflix</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="pinning-header" id="header">
+    <div class="main-header">
+      <a href="#" class="logo">GAMEFLIX</a>
+      <ul class="nav-links">
+        <li><a href="#">Início</a></li>
+        <li><a href="#">FPS</a></li>
+        <li><a href="#">RPG</a></li>
+        <li><a href="#">CORRIDA</a></li>
+        <li><a href="#">MEUS JOGOS</a></li>
+      </ul>
+      <div class="header-actions">
+        <button></button>
+        <button></button>
+        <img class="profile" src="https://shopinfo.vteximg.com.br/arquivos/ids/1722843-1000-1000/1.png?v=638999311948470000" alt="Perfil">
+      </div>
+    </div>
+  </header>
+
+  <section class="banner" id="main-banner">
+    <video class="banner-video" autoplay muted loop playsinline id="banner-video">
+      <source src="https://res.cloudinary.com/dlt1gqwnc/video/upload/v1771613996/farcry_z2rivm.mp4" type="video/mp4">
+    </video>
+
+    <div class="banner-content">
+      <h1 id="banner-title">FarCry Primal</h1>
+      <p id="banner-desc">Jogo disponível GRATIS para testar a plataforma</p>
+      <a href="https://drive.google.com/uc?export=download&id=1jCvhMNka9U0hJv2NqioXyS3xWGLbI9nQ" download>
+        <button class="btn-play">▶ DOWNLOAD GRATIS</button>
+      </a>
+      <button class="btn-info">ⓘ Mais informações</button>
+    </div>
+  </section>
+
+  <div class="top10-banner">
+    <img 
+      src="https://res.cloudinary.com/dlt1gqwnc/image/upload/v1771951448/Banner_Horizontal_Black_Friday_Vibrante_Preto_e_Vermelho_2_lhgsn0.png"
+      alt="Banner Top 10"
+    >
+  </div>
+
+  <div class="row">
+    <h2>VEJA A LISTA DOS TOP 10 JOGOS DA GAMEFLIX</h2>
+
+    <div class="top-10-container">
+      <button class="arrow-left" onclick="scrollLeft()">‹</button>
+
+      <div class="top-10-scroll" id="top10">
+        <div class="card-container" onclick="updateBanner(
+          'Red Dead Redemption 2',
+          'https://upload.wikimedia.org/wikipedia/pt/e/e7/Red_Dead_Redemption_2.png',
+          'Crime e ação em um enredo envolvente de irmandade.',
+          'https://res.cloudinary.com/dlt1gqwnc/video/upload/v1771734264/red_dead_2_hsqfm7.mp4'
+        )">
+          <span class="rank-number">1</span>
+          <img src="https://upload.wikimedia.org/wikipedia/pt/e/e7/Red_Dead_Redemption_2.png" class="poster-img" alt="Red Dead Redemption 2">
+          <div class="badge-new">Novidade</div>
+        </div>
+
+        <div class="card-container" onclick="updateBanner(
+          'God of War Ragnarok',
+          'https://upload.wikimedia.org/wikipedia/en/a/a7/God-of-War-Ragnarok.jpg',
+          'Kratos e Atreus enfrentam novos desafios nórdicos.',
+          'https://res.cloudinary.com/seu-cloudinary/video/upload/v123456/gow_ragnarok_trailer.mp4'
+        )">
+          <span class="rank-number">2</span>
+          <img src="https://gmedia.playstation.com/is/image/SIEPDC/god-of-war-ragnarok-store-art-01-10sep21$ru?$800px--t$" class="poster-img" alt="God of War Ragnarok">
+          <div class="badge-new">Novidade</div>
+        </div>
+
+        <div class="card-container" onclick="updateBanner(
+          'FIFA 26',
+          'https://upload.wikimedia.org/wikipedia/en/thumb/2/2f/FIFA_26_cover.jpg/220px-FIFA_26_cover.jpg',
+          'O futebol mais realista agora com modos renovados.',
+          'https://res.cloudinary.com/dlt1gqwnc/video/upload/v1771736680/FIFA26_ttc0uk.mp4'
+        )">
+          <span class="rank-number">3</span>
+         <img src="https://res.cloudinary.com/dlt1gqwnc/image/upload/v1771886278/Captura_de_tela_2026-02-23_185713_cljm2d.png" class="poster-img" alt="FIFA 26">
+          <div class="badge-new">Novidade</div>
+        </div>
+
+        <div class="card-container" onclick="updateBanner(
+          'Forza Horizon 6',
+          'https://upload.wikimedia.org/wikipedia/en/2/2b/Forza_Horizon_6_cover.jpg',
+          'Corridas insanas e mundos abertos de tirar o fôlego.',
+          'https://res.cloudinary.com/seu-cloudinary/video/upload/v123456/forza6_trailer.mp4'
+        )">
+          <span class="rank-number">4</span>
+          <img src="https://azitech.com.br/wp-content/uploads/2024/08/Forza-Horizon-6-lancamento.jpg" class="poster-img" alt="Forza Horizon 6">
+          <div class="badge-new">Novidade</div>
+        </div>
+
+        <div class="card-container" onclick="updateBanner(
+          'Battlefield 6',
+          'https://upload.wikimedia.org/wikipedia/en/4/43/Battlefield_6_cover.jpg',
+          'Ação militar épica em grandes campos de batalha.',
+          'https://res.cloudinary.com/seu-cloudinary/video/upload/v123456/bf6_trailer.mp4'
+        )">
+          <span class="rank-number">5</span>
+          <img src="https://cdn1.epicgames.com/offer/a14a02aa3c8143729605eaf7c93d7501/EGS_Battlefield6_BattlefieldStudios_S2_1200x1600-a88625a836120c55650c83d17a010c25" class="poster-img" alt="Battlefield 6">
+          <div class="badge-new">Novidade</div>
+        </div>
+
+        <div class="card-container" onclick="updateBanner(
+          'Uncharted 4',
+          'https://upload.wikimedia.org/wikipedia/en/f/fd/Uncharted_4_box_art.jpg',
+          'A aventura de Nathan Drake continua em busca de tesouros perdidos.',
+          'https://res.cloudinary.com/seu-cloudinary/video/upload/v123456/uncharted4_trailer.mp4'
+        )">
+          <span class="rank-number">6</span>
+          <img src="https://cdn1.epicgames.com/offer/8b2d6cf2b45b41f1abe91bc5b7c1e8f9/EGS_UNCHARTEDLegacyofThievesCollection_NaughtyDogLLC_S2_1200x1600-9deaa177d8716bde5478cdd75d850c9c" class="poster-img" alt="Uncharted 4">
+          <div class="badge-new">2 em 1</div>
+        </div>
+
+        <div class="card-container" onclick="updateBanner(
+          'Call of Duty: Modern Warfare 2',
+          'https://upload.wikimedia.org/wikipedia/en/9/9c/Call_of_Duty_Modern_Warfare_2_cover.jpg',
+          'Combate moderno e intenso em campanhas cinematográficas.',
+          'https://res.cloudinary.com/seu-cloudinary/video/upload/v123456/codmw2_trailer.mp4'
+        )">
+          <span class="rank-number">7</span>
+          <img src="https://image.api.playstation.com/vulcan/img/rnd/202008/1301/raryqz0xAsk3HutslehRAW4A.png" class="poster-img" alt="COD MW2">
+          <div class="badge-new">Novidade</div>
+        </div>
+
+        <div class="card-container" onclick="updateBanner(
+          'GTA 5',
+          'https://bdjogos.com.br/capas/6265-the-witcher-3-wild-hunt-capa-1.jpg',
+          'Explore Los Santos e suas aventuras criminosas épicas.',
+          'https://res.cloudinary.com/seu-cloudinary/video/upload/v123456/gta5_trailer.mp4'
+        )">
+          <span class="rank-number">8</span>
+          <img src="https://upload.wikimedia.org/wikipedia/pt/8/80/Grand_Theft_Auto_V_capa.png" class="poster-img" alt="GTA 5">
+        </div>
+
+        <div class="card-container" onclick="updateBanner(
+          'Spider-Man 2',
+          'https://cdn1.epicgames.com/offer/b2818b59c0bb420e9647983dfd254931/EGS_MarvelsSpiderManDigitalDeluxeEdition_InsomniacGamesNixxesSoftware_Editions_S2_1200x1600-148e0014e79aa7c2cb23ae2414b11a16',
+          'Peter Parker retorna em novas aventuras pela cidade.',
+          'https://res.cloudinary.com/seu-cloudinary/video/upload/v123456/spiderman2_trailer.mp4'
+        )">
+          <span class="rank-number">9</span>
+          <img src="https://cdn1.epicgames.com/offer/b2818b59c0bb420e9647983dfd254931/EGS_MarvelsSpiderManDigitalDeluxeEdition_InsomniacGamesNixxesSoftware_Editions_S2_1200x1600-148e0014e79aa7c2cb23ae2414b11a16" class="poster-img" alt="Spider-Man 2">
+          <div class="badge-new">Novidade</div>
+        </div>
+
+        <div class="card-container" onclick="updateBanner(
+          'The Last of Us 2',
+          'https://m.media-amazon.com/images/M/MV5BODIwYWZmYWMtYTliNC00YWQ5LTg5ZmEtNTZhNmUxNjdiMzNiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+          'Uma história intensa de sobrevivência e emoções profundas.',
+          'https://res.cloudinary.com/seu-cloudinary/video/upload/v123456/tlou2_trailer.mp4'
+        )">
+          <span class="rank-number">10</span>
+          <img src="https://m.media-amazon.com/images/M/MV5BODIwYWZmYWMtYTliNC00YWQ5LTg5ZmEtNTZhNmUxNjdiMzNiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" class="poster-img" alt="The Last of Us 2">
+          <div class="badge-new">Novidade</div>
+        </div>
+
+      </div> <div class="faixa-destaque">
+        LEVE ESSES 10 ÍCONES DO MUNDO DOS GAMES DE R$149,00 por APENAS R$49,90 
+      </div>
+      
+      <button class="arrow-right" onclick="scrollRight()">›</button>
+    </div> <div class="floating-btn-container">
+      <button class="netflix-btn">COMPRAR AGORA</button>
+    </div>
+  </div>
+
+  <div class="faixa-destaque">
+              
+  </div>
+
+  <div class="row">
+    <h2>AQUI VAI O SUPER COMBO GAMEFLIX ULTRA GAMEPASS PREMIUM PLUS MASTER😅</h2>
+    <div class="faixa-destaque">
+                
+    </div>
+    <div class="games-scroll">
+      <img class="game-card" src="https://image.api.playstation.com/vulcan/ap/rnd/202309/2015/a998402a21dbdc13ea5409aa27fbecc5234e5a7e6c6c4273.jpg" onclick="updateBanner('Assassin’s Creed III','https://via.placeholder.com/160x230?text=Game+1','Assassin’s Creed III - colonização americana.')">
+      <img class="game-card" src="https://img.elo7.com.br/product/main/494956D/quadro-decorativo-games-resident-evil-4-remake-games.jpg" onclick="updateBanner('Assassin’s Creed 2','https://via.placeholder.com/160x230?text=Game+2','Assassin’s Creed 2 - Renascimento italiano.')">
+      <img class="game-card" src="https://www.productsleutels.nl/wp-content/uploads/2021/01/Cyberpunk-2077-PC-COVER.jpg" onclick="updateBanner('Batman: Arkham Knight','https://images.igdb.com/igdb/image/upload/t_original/co1qv5.jpg','Batman enfrenta o Espantalho em Gotham.')">
+      <img class="game-card" src="https://assets.xboxservices.com/assets/7b/54/7b54f5e4-0857-4ce3-8a18-2b8c431e8a9e.jpg?n=Elden-Ring_GLP-Page-Hero-0_1083x1222_01.jpg" onclick="updateBanner('Batman: Arkham Origins','https://images.igdb.com/igdb/image/upload/t_original/co1r7f.jpg','Origens do Cavaleiro das Trevas.')">
+      <img class="game-card" src="https://pixelstore.cl/cdn/shop/files/Disenosintitulo_25.png?v=1730762881" onclick="updateBanner('Bodycam','https://via.placeholder.com/160x230?text=Game+5','Jogo misterioso de investigação.')">
+      <img class="game-card" src="https://i.pinimg.com/736x/c6/bc/5f/c6bc5f1ff49914bba3a0ac4f9feca1b5.jpg" onclick="updateBanner('Ghost of Tsushima DIRECTOR\'S CUT','https://images.igdb.com/igdb/image/upload/t_original/co3w34.jpg','Aventura samurai no Japão feudal.')">
+      <img class="game-card" src="https://bdjogos.com.br/capas/24175-call-of-duty-black-ops-6-capa-1.webp" onclick="updateBanner('UNCHARTED: Legacy of Thieves Collection','https://images.igdb.com/igdb/image/upload/t_original/co1fdj.jpg','Coleção com aventuras de Nathan Drake.')">
+      <img class="game-card" src="https://static.posters.cz/image/750/116582.jpg" onclick="updateBanner('Tomb Raider','https://images.igdb.com/igdb/image/upload/t_original/co1p31.jpg','Lara Croft explora tumbas e mistérios.')">
+      <img class="game-card" src="https://bdjogos.com.br/capas/6265-the-witcher-3-wild-hunt-capa-1.jpg" onclick="updateBanner('Days Gone','https://images.igdb.com/igdb/image/upload/t_original/co3q8l.jpg','Sobrevivência em mundo pós-apocalíptico.')">
+      <img class="game-card" src="https://image.api.playstation.com/cdn/HP0700/CUSA03434_00/9Lvijwqww6gvFTsciIzMWqs61DlOg8xIAsomficGKF6g7z6bYgrYGAoG80gr87pw.png" onclick="updateBanner('Dying Light 2 Stay Human: Reloaded Edition','https://images.igdb.com/igdb/image/upload/t_original/co3t6r.jpg','Parkour e sobrevivência zumbi.')">
+
+      <img class="game-card" src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/07/Capa-completa-EA-Sports-FC-26.jpg?w=849&h=477&crop=0" onclick="updateBanner('Far Cry 6','https://via.placeholder.com/160x230?text=Game+11','Ação e aventura em mundo aberto.')">
+      <img class="game-card" src="https://upload.wikimedia.org/wikipedia/pt/e/e7/Red_Dead_Redemption_2.png" onclick="updateBanner('Resident Evil 4 Remake','https://via.placeholder.com/160x230?text=Game+12','Survival horror clássico remasterizado.')">
+      <img class="game-card" src="https://image.api.playstation.com/vulcan/ap/rnd/202109/1321/3mjMyRiJaq8lw1EFWiTCUJRV.png" onclick="updateBanner('Horizon Forbidden West','https://images.igdb.com/igdb/image/upload/t_original/co2e3r.jpg','Aventura pós-apocalíptica futurista.')">
+      <img class="game-card" src="https://m.media-amazon.com/images/M/MV5BODIwYWZmYWMtYTliNC00YWQ5LTg5ZmEtNTZhNmUxNjdiMzNiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" onclick="updateBanner('Elden Ring','https://images.igdb.com/igdb/image/upload/t_original/co2f4t.jpg','Exploração épica em mundo aberto.')">
+      <img class="game-card" src="https://media.rockstargames.com/rockstargames/img/global/news/upload/actual_1421771177.jpg" onclick="updateBanner('Cyberpunk 2077','https://via.placeholder.com/160x230?text=Game+15','RPG futurista de mundo aberto.')">
+      <img class="game-card" src="https://image.api.playstation.com/vulcan/ap/rnd/202111/2001/9Vdas199J3tqxTIBWGijbpjW.png?w=1024&thumb=false" onclick="updateBanner('The Witcher 3','https://images.igdb.com/igdb/image/upload/t_original/co3g5h.jpg','Aventura de RPG épica em mundo aberto.')">
+      <img class="game-card" src="https://meups.com.br/wp-content/uploads/2025/10/Battlefield-6-REVIEW-PS5-scaled.jpg" onclick="updateBanner('Ghostwire Tokyo','https://images.igdb.com/igdb/image/upload/t_original/co3h6i.jpg','Terror sobrenatural em Tóquio.')">
+      <img class="game-card" src="https://assets.nintendo.com/image/upload/q_auto/f_auto/store/software/switch/70010000089518/cc83ebef3be669c8fcc66f9c53e3c6e6dabf5cbc44947c9e1c7e5febeb254ee6" onclick="updateBanner('Stray','https://images.igdb.com/igdb/image/upload/t_original/co3i7j.jpg','Aventura de gato em cidade futurista.')">
+      <img class="game-card" src="https://azitech.com.br/wp-content/uploads/2024/08/Forza-Horizon-6-lancamento.jpg" onclick="updateBanner('Redfall','https://images.igdb.com/igdb/image/upload/t_original/co3j8k.jpg','Vampiros e ação cooperativa.')">
+      <img class="game-card" src="https://cdn1.epicgames.com/offer/6e6aa039c73347b885803de65ac5d3db/EGS_GhostofTsushima_SuckerPunchProductions_S2_1200x1600-e23e02c1d70be7b528dba50860f87d39" onclick="updateBanner('Horizon Forbidden West','https://images.igdb.com/igdb/image/upload/t_original/co2e3r.jpg','Aventura pós-apocalíptica futurista.')">
+      <img class="game-card" src="https://assets-prd.ignimgs.com/2021/08/19/elder-scrolls-skyrim-button-2017-1629409446732.jpg?crop=1%3A1%2Csmart&format=jpg&auto=webp&quality=80" onclick="updateBanner('Elden Ring','https://images.igdb.com/igdb/image/upload/t_original/co2f4t.jpg','Exploração épica em mundo aberto.')">
+      <img class="game-card" src="https://www.europanet.com.br/upload/id_produto/60_____/6001502g.jpg" onclick="updateBanner('Cyberpunk 2077','https://via.placeholder.com/160x230?text=Game+15','RPG futurista de mundo aberto.')">
+      <img class="game-card" src="https://www.adrenaline.com.br/wp-content/uploads/2024/04/call-of-duty-warzone-capa.jpg" onclick="updateBanner('The Witcher 3','https://images.igdb.com/igdb/image/upload/t_original/co3g5h.jpg','Aventura de RPG épica em mundo aberto.')">
+      <img class="game-card" src="https://cdn.loaded.com/496x700/media/catalog/product/n/e/new_project_-_2023-08-28t100027.863_1.jpg" onclick="updateBanner('Ghostwire Tokyo','https://images.igdb.com/igdb/image/upload/t_original/co3h6i.jpg','Terror sobrenatural em Tóquio.')">
+      <img class="game-card" src="https://store-images.s-microsoft.com/image/apps.51626.68598211680266771.73ef9826-822a-4a0b-ab4a-4fe8fd87fc3b.714f1b5c-6793-443d-a291-74b81479dc92" onclick="updateBanner('Stray','https://images.igdb.com/igdb/image/upload/t_original/co3i7j.jpg','Aventura de gato em cidade futurista.')">
+      <img class="game-card" src="https://upload.wikimedia.org/wikipedia/pt/5/59/Far_cry_3_box_art.jpg" onclick="updateBanner('Redfall','https://images.igdb.com/igdb/image/upload/t_original/co3j8k.jpg','Vampiros e ação cooperativa.')">
+      <img class="game-card" src="https://cdn.europosters.eu/image/1300/96339.jpg" onclick="updateBanner('Stray','https://images.igdb.com/igdb/image/upload/t_original/co3i7j.jpg','Aventura de gato em cidade futurista.')">
+      <img class="game-card" src="https://www.adrenaline.com.br/wp-content/uploads/2024/04/call-of-duty-warzone-capa.jpg" onclick="updateBanner('The Witcher 3','https://images.igdb.com/igdb/image/upload/t_original/co3g5h.jpg','Aventura de RPG épica em mundo aberto.')">
+      <img class="game-card" src="https://cdn.loaded.com/496x700/media/catalog/product/n/e/new_project_-_2023-08-28t100027.863_1.jpg" onclick="updateBanner('Ghostwire Tokyo','https://images.igdb.com/igdb/image/upload/t_original/co3h6i.jpg','Terror sobrenatural em Tóquio.')">
+      <img class="game-card" src="https://store-images.s-microsoft.com/image/apps.51626.68598211680266771.73ef9826-822a-4a0b-ab4a-4fe8fd87fc3b.714f1b5c-6793-443d-a291-74b81479dc92" onclick="updateBanner('Stray','https://images.igdb.com/igdb/image/upload/t_original/co3i7j.jpg','Aventura de gato em cidade futurista.')">
+      <img class="game-card" src="https://upload.wikimedia.org/wikipedia/pt/5/59/Far_cry_3_box_art.jpg" onclick="updateBanner('Redfall','https://images.igdb.com/igdb/image/upload/t_original/co3j8k.jpg','Vampiros e ação cooperativa.')">
+      <img class="game-card" src="https://cdn.europosters.eu/image/1300/96339.jpg" onclick="updateBanner('Stray','https://images.igdb.com/igdb/image/upload/t_original/co3i7j.jpg','Aventura de gato em cidade futurista.')">
+      
+      <div class="faixa-destaque">
+        LEVE ESSES 10 ÍCONES DO MUNDO DOS GAMES DE 149,00 por 49,90 — POR TEMPO LIMITADO
+      </div>
+      <button class="arrow-right" onclick="scrollRight()">›</button>
+    </div> <div class="floating-btn-container">
+      <button class="netflix-btn">COMPRAR AGORA</button>
+      </div>
+  </div>
+  
+  <div class="row">
+    
+  </div>
+
+  <div class="netflix-modal" id="netflixModal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">×</span>
+
+      <video id="modalVideo" class="modal-video" controls autoplay muted></video>
+
+      <div class="modal-info">
+        <h2 id="modalTitle"></h2>
+        <p id="modalDesc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
