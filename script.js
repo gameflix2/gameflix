@@ -5,26 +5,14 @@ function scrollLeft(){
   if(!top10) return;
   const card = top10.querySelector(".card-container");
   if(!card) return;
-
-  const scrollAmount = card.offsetWidth + 45;
-
-  top10.scrollBy({
-    left: -scrollAmount * 2,
-    behavior: "smooth"
-  });
+  top10.scrollBy({ left: -(card.offsetWidth + 45) * 2, behavior: "smooth" });
 }
 
 function scrollRight(){
   if(!top10) return;
   const card = top10.querySelector(".card-container");
   if(!card) return;
-
-  const scrollAmount = card.offsetWidth + 45;
-
-  top10.scrollBy({
-    left: scrollAmount * 2,
-    behavior: "smooth"
-  });
+  top10.scrollBy({ left: (card.offsetWidth + 45) * 2, behavior: "smooth" });
 }
 
 /* --- EFEITO DO HEADER NO SCROLL --- */
@@ -37,24 +25,21 @@ window.addEventListener('scroll', ()=>{
   }
 });
 
-/* --- SOM AUTOMÁTICO DO BANNER PRINCIPAL CORRIGIDO --- */
+/* --- CONTROLE DO VÍDEO DO BANNER --- */
 window.addEventListener("DOMContentLoaded", ()=>{
   const bannerSection = document.getElementById("main-banner");
   const bannerVideo = document.getElementById("banner-video");
   if(!bannerVideo || !bannerSection) return;
 
-  function enableSound(){
+  // Para evitar bagunça de áudio, o som só ativa se clicar no banner
+  bannerSection.addEventListener("click", ()=>{
     if(bannerVideo.muted){
       bannerVideo.muted = false;
-      bannerVideo.volume = 0.5;
-      bannerVideo.play().catch(()=>{});
+      bannerVideo.volume = 0.3; // Volume agradável
+    } else {
+      bannerVideo.muted = true;
     }
-  }
-
-  // Agora ele só ativa o som se você interagir COM O BANNER, não com a página toda
-  bannerSection.addEventListener("mouseenter", enableSound);
-  bannerSection.addEventListener("touchstart", enableSound, {once:true});
-  bannerSection.addEventListener("click", enableSound, {once:true});
+  });
 });
 
 /* --- LÓGICA DO MODAL (ESTILO NETFLIX COM YOUTUBE) --- */
@@ -63,15 +48,15 @@ function openModal(title, desc, youtubeId) {
   const iframe = document.getElementById("modalVideo");
   const bannerVideo = document.getElementById("banner-video");
 
-  // Pausa o vídeo do banner de fundo para não misturar os sons
+  // PAUSA E MUTA O VÍDEO DE FUNDO À FORÇA!
   if(bannerVideo) {
     bannerVideo.pause();
+    bannerVideo.muted = true; 
   }
 
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalDesc").textContent = desc;
 
-  // Monta o link do YouTube
   iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1`;
   
   modal.classList.add("active");
@@ -83,14 +68,15 @@ function closeModal(){
   const iframe = document.getElementById("modalVideo");
   const bannerVideo = document.getElementById("banner-video");
 
-  // Apaga o link do iframe para o vídeo parar de tocar
+  // Remove o vídeo do YouTube para ele parar de tocar
   iframe.src = "";
 
   modal.classList.remove("active");
   document.body.style.overflow = "";
 
-  // Volta a dar play no vídeo do banner lá do fundo
+  // Volta a rodar o vídeo de fundo, mas MUTADO para os sons não brigarem
   if(bannerVideo) {
+    bannerVideo.muted = true;
     bannerVideo.play().catch(()=>{});
   }
 }
