@@ -422,67 +422,81 @@ body {
   z-index: 10;
 }
 
-j7nu/* --- ESTILO RESPONSIVO PARA MOBILE --- */
+/* --- ESTILO RESPONSIVO PARA MOBILE --- */
 @media (max-width: 768px) {
-  
-  /* 1. Ajuste do Header: Esconde links de texto para não amontoar */
-  .nav-links {
-    display: none; 
-  }
-  
-  .logo {
-    font-size: 1.5rem;
+
+  /* 1. Ajuste do Banner */
+  .banner { height: 45vh; }
+  #banner-title { font-size: 1.8rem; text-align: center; }
+  .btn-play { padding: 10px 20px; font-size: 0.9rem; }
+
+  /* 2. Títulos das Seções (Top 10 e Combo) */
+  .row h2 {
+    font-size: 1.4rem !important; /* Texto agora fica visível */
+    margin-left: 15px;
+    margin-top: 20px;
   }
 
-  /* 2. Banner: Ajusta a altura para o vídeo não ficar "achatado" */
-  .banner {
-    height: 50vh; /* Ocupa metade da tela do celular */
-  }
-
-  .banner-content {
-    bottom: 15%;
-    left: 5%;
-  }
-
-  #banner-title {
-    font-size: 2rem;
-  }
-
-  .banner-desc {
-    display: none; /* Esconde a descrição no mobile para limpar o visual */
-  }
-
-  /* 3. Cards de Jogos: Deixa eles num tamanho bom para o polegar */
-  .game-card {
-    width: 110px; 
-    height: 160px;
-  }
-
-  /* 4. Top 10: Diminui os números gigantes */
-  .rank-number {
-    font-size: 70px;
-    bottom: -10px;
-    left: -15px;
-  }
-
+  /* 3. Correção das Tags Novidade (Para não ficarem fora do card) */
   .card-container {
-    min-width: 100px;
-    margin-right: 25px;
+    position: relative; /* Mantém a tag presa ao card */
+    min-width: 30%; /* Exibe aprox. 3 cards por tela */
+    margin-right: 10px;
   }
 
-  /* 5. Modal: Faz o vídeo do YouTube ocupar a largura toda no celular */
-  .modal-content {
-    width: 95%;
-    top: 20%;
+  .badge-new {
+    font-size: 0.6rem;
+    padding: 2px 5px;
+    top: 5px;
+    right: 5px;
   }
 
-  .modal-video {
-    height: 200px; /* Altura ideal para o trailer no celular */
+  /* 4. Top 10 e Combo: Scroll Horizontal Suave */
+  .top-10-scroll, .games-scroll {
+    display: flex !important; /* Força ficar um do lado do outro */
+    overflow-x: auto !important; /* Permite arrastar para o lado */
+    scroll-behavior: smooth;
+    padding: 10px 15px;
+    gap: 10px;
   }
 
-  /* 6. Faixas de Destaque: Ajusta o texto para não quebrar feio */
-  .faixa-destaque {
-    font-size: 0.8rem;
-    padding: 10px;
+  /* Esconde a barra de rolagem feia mas mantém o deslize */
+  .top-10-scroll::-webkit-scrollbar, .games-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 5. Tamanho das Imagens (Igualando Top 10 e Combo) */
+  .poster-img, .game-card {
+    width: 100% !important; /* Preenche o container do card */
+    height: 160px !important;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  /* 6. Números do Top 10 */
+  .rank-number {
+    font-size: 50px;
+    bottom: -5px;
+    left: -10px;
+    -webkit-text-stroke: 1px #fff;
+  }
+
+  /* 7. Setinha discreta indicando que tem mais para o lado */
+  .row::after {
+    content: "Arrasta para o lado ➔";
+    display: block;
+    color: #aaa;
+    font-size: 0.7rem;
+    text-align: right;
+    margin-right: 15px;
+    margin-top: -5px;
+    opacity: 0.7;
+  }
+
+  /* 8. Botão Comprar Agora */
+  .netflix-btn {
+    width: 90%;
+    font-size: 1rem;
+    padding: 12px;
   }
 }
