@@ -8,7 +8,9 @@ body {
   margin: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-color: var(--bg-dark);
-  color: #fff;
+  color: #fff;MADIA
+
+  
   overflow-x: hidden;
 }
 
@@ -162,7 +164,7 @@ body {
 .row h2 {
   font-size: 1.4vw;
   color: #e5e5e5;
-  margin-bottom: 10px;
+  margin-bottom: 2px;
 }
 
 .top-10-container {
@@ -498,3 +500,4 @@ body {
     display: none;
   }
 }
+
