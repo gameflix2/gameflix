@@ -182,7 +182,7 @@ body {
 
 .card-container {
   position: relative;
-  min-width: 300px; /* mais espaço pro número */
+  min-width: 300px;
   height: 260px;
   display: flex;
   align-items: flex-end;
@@ -201,13 +201,8 @@ body {
   font-size: 260px;
   font-weight: 900;
   line-height: 1;
-
-  /* 👇 INTERIOR PRETO */
   color: #000;
-
-  /* 👇 BORDA CONTINUA IGUAL */
   -webkit-text-stroke: 6px #6a6a6a;
-
   z-index: 1;
   pointer-events: none;
 }
@@ -217,7 +212,7 @@ body {
   height: 260px;
   object-fit: cover;
   z-index: 2;
-  margin-left: 110px; /* ESSA é a chave */
+  margin-left: 110px;
   border-radius: 4px;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
@@ -263,13 +258,11 @@ body {
   .arrow-left, .arrow-right { width: 30px; height: 50px; font-size: 1.5rem; }
 }
 
-/* 👇 COLE AQUI 👇 */
-
 /* ROW normal jogos */
 .games-scroll {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px; /* mantém 14px entre os cards */
+  gap: 14px;
 }
 
 .games-scroll::-webkit-scrollbar{
@@ -278,7 +271,7 @@ body {
 
 .game-card {
   width: calc((100% / 9) - 14px);
-  height: 307px; /* 230 * (800/600) ≈ 307px */
+  height: 307px;
   object-fit: cover;
   border-radius: 4px;
   cursor: pointer;
@@ -288,58 +281,8 @@ body {
 .game-card:hover{
   transform:scale(1.08);
 }
-  /* COMBOS */
-.combo-scroll{
-  display:flex;
-  gap:14px;
-  overflow-x:auto;
-  padding:10px 0;
-}
 
-.combo-scroll::-webkit-scrollbar{
-  display:none;
-}
-
-.combo-card{
-  min-width:260px;
-  height:150px;
-  border-radius:6px;
-  position:relative;
-  overflow:hidden;
-  cursor:pointer;
-  transition:.3s;
-  background:#1c1c1c;
-}
-
-.combo-card:hover{
-  transform:scale(1.06);
-}
-
-.combo-card img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:.5;
-}
-
-.combo-info{
-  position:absolute;
-  bottom:0;
-  padding:12px;
-}
-
-.combo-info h3{
-  margin:0;
-  font-size:16px;
-}
-
-.combo-price{
-  font-weight:bold;
-  color:#46d369;
-}
-  /* BOTÃO COMPRAR AGORA - Estilo Futurista Neon */
+/* BOTÃO COMPRAR AGORA - Estilo Futurista Neon */
 .netflix-btn {
   display: inline-block;
   padding: 22px 55px;
@@ -356,6 +299,7 @@ body {
   z-index: 1;
   transition: 0.3s;
   box-shadow: 0 0 10px #e50914, 0 0 20px #ff3b3b, 0 0 30px #ff3b3b;
+  animation: float 2.5s ease-in-out infinite;
 }
 
 /* Glow animado */
@@ -381,49 +325,33 @@ body {
   transform: scale(1.1);
   box-shadow: 0 0 20px #ff0000, 0 0 30px #ff3b3b, 0 0 40px #ff3b3b;
 }
-  .floating-btn-container {
+
+.floating-btn-container {
   text-align: center;
-  margin: 40px 0; /* espaçamento acima e abaixo */
+  margin: 40px 0;
   position: relative;
   z-index: 10;
 }
 
-/* Efeito de flutuação */
-.netflix-btn {
-  animation: float 2.5s ease-in-out infinite;
-}
-
-/* Keyframes da flutuação */
 @keyframes float {
   0%, 100% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-6px) scale(1.05); }
 }
-  /* FAIXA DE DESCRIÇÃO TOP 10 */
-.top10-description {
-  background: rgba(255,0,0,0.2);
-  padding: 12px;
-  border-radius: 6px;
-  text-align: center;
-  color: #fff;
-  font-size: 40px;
-  font-weight: 500;
-  margin: 20px 0;
-}
-  .faixa-destaque{
+
+/* FAIXAS DE DESTAQUE */
+.faixa-destaque{
   font-family:'Bebas Neue', sans-serif;
   color:#fff;
   text-align:center;
   padding:24px 40px;
-font-size:36px; /* AUMENTA A FRASE */
+  font-size:36px;
 }
-  /* BANNER ACIMA DO TOP 10 */
+
 .top10-banner {
   display: flex;
   justify-content: center;
-
-  /* ↓ sobe o banner em relação ao trailer */
-  margin-top: -0px;   /* ~5cm para cima */
-  margin-bottom: 110px; /* mantém espaço do TOP 10 */
+  margin-top: -0px; 
+  margin-bottom: 110px;
 }
 
 .top10-banner img {
@@ -431,7 +359,8 @@ font-size:36px; /* AUMENTA A FRASE */
   height: auto;
   border-radius: 8px;
 }
-  /* ===== MODAL NETFLIX STYLE ===== */
+
+/* ===== MODAL NETFLIX STYLE ===== */
 .netflix-modal {
   position: fixed;
   inset: 0;
