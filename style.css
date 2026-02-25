@@ -450,7 +450,7 @@ body {
 
   .row h2 {
     font-size: 1.1rem !important;
-    margin-bottom: 5px !important; /* Cola o título no card */
+    margin-bottom: 20px !important; /* Cola o título no card */
     margin-top: 0px !important;
     padding-left: 15px;
   }
@@ -500,4 +500,5 @@ body {
     display: none;
   }
 }
+
 
