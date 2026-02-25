@@ -421,3 +421,68 @@ body {
   cursor: pointer;
   z-index: 10;
 }
+
+j7nu/* --- ESTILO RESPONSIVO PARA MOBILE --- */
+@media (max-width: 768px) {
+  
+  /* 1. Ajuste do Header: Esconde links de texto para não amontoar */
+  .nav-links {
+    display: none; 
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  /* 2. Banner: Ajusta a altura para o vídeo não ficar "achatado" */
+  .banner {
+    height: 50vh; /* Ocupa metade da tela do celular */
+  }
+
+  .banner-content {
+    bottom: 15%;
+    left: 5%;
+  }
+
+  #banner-title {
+    font-size: 2rem;
+  }
+
+  .banner-desc {
+    display: none; /* Esconde a descrição no mobile para limpar o visual */
+  }
+
+  /* 3. Cards de Jogos: Deixa eles num tamanho bom para o polegar */
+  .game-card {
+    width: 110px; 
+    height: 160px;
+  }
+
+  /* 4. Top 10: Diminui os números gigantes */
+  .rank-number {
+    font-size: 70px;
+    bottom: -10px;
+    left: -15px;
+  }
+
+  .card-container {
+    min-width: 100px;
+    margin-right: 25px;
+  }
+
+  /* 5. Modal: Faz o vídeo do YouTube ocupar a largura toda no celular */
+  .modal-content {
+    width: 95%;
+    top: 20%;
+  }
+
+  .modal-video {
+    height: 200px; /* Altura ideal para o trailer no celular */
+  }
+
+  /* 6. Faixas de Destaque: Ajusta o texto para não quebrar feio */
+  .faixa-destaque {
+    font-size: 0.8rem;
+    padding: 10px;
+  }
+}
