@@ -422,81 +422,72 @@ body {
   z-index: 10;
 }
 
-/* --- ESTILO RESPONSIVO PARA MOBILE --- */
+/* --- AJUSTE MOBILE FINAL - O ARSENAL DE GAMES --- */
 @media (max-width: 768px) {
 
-  /* 1. Ajuste do Banner */
-  .banner { height: 45vh; }
-  #banner-title { font-size: 1.8rem; text-align: center; }
-  .btn-play { padding: 10px 20px; font-size: 0.9rem; }
+  /* 1. Remove as tags de Novidade APENAS do Top 10 */
+  #top10 .badge-new {
+    display: none !important;
+  }
 
-  /* 2. Títulos das Seções (Top 10 e Combo) */
+  /* 2. Sobe a descrição (título da seção) para perto dos cards */
   .row h2 {
-    font-size: 1.4rem !important; /* Texto agora fica visível */
+    font-size: 1.3rem !important;
+    margin-bottom: 5px !important; /* Diminui o espaço entre o título e os cards */
+    margin-top: 15px !important;
     margin-left: 15px;
-    margin-top: 20px;
   }
 
-  /* 3. Correção das Tags Novidade (Para não ficarem fora do card) */
-  .card-container {
-    position: relative; /* Mantém a tag presa ao card */
-    min-width: 30%; /* Exibe aprox. 3 cards por tela */
-    margin-right: 10px;
-  }
-
-  .badge-new {
-    font-size: 0.6rem;
-    padding: 2px 5px;
-    top: 5px;
-    right: 5px;
-  }
-
-  /* 4. Top 10 e Combo: Scroll Horizontal Suave */
-  .top-10-scroll, .games-scroll {
-    display: flex !important; /* Força ficar um do lado do outro */
-    overflow-x: auto !important; /* Permite arrastar para o lado */
-    scroll-behavior: smooth;
+  /* 3. Cards do Combo na Vertical e sem esmagar */
+  .games-scroll {
+    display: flex !important;
+    overflow-x: auto !important;
+    gap: 12px;
     padding: 10px 15px;
-    gap: 10px;
+    -webkit-overflow-scrolling: touch;
   }
 
-  /* Esconde a barra de rolagem feia mas mantém o deslize */
-  .top-10-scroll::-webkit-scrollbar, .games-scroll::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* 5. Tamanho das Imagens (Igualando Top 10 e Combo) */
-  .poster-img, .game-card {
-    width: 100% !important; /* Preenche o container do card */
-    height: 160px !important;
-    object-fit: cover;
+  .game-card {
+    min-width: 110px !important; /* Largura fixa para manter vertical */
+    height: 165px !important;    /* Altura maior que a largura (Vertical) */
+    object-fit: cover !important;
     border-radius: 4px;
+    flex-shrink: 0; /* Impede o navegador de achatar o card */
   }
 
-  /* 6. Números do Top 10 */
-  .rank-number {
-    font-size: 50px;
-    bottom: -5px;
-    left: -10px;
-    -webkit-text-stroke: 1px #fff;
-  }
-
-  /* 7. Setinha discreta indicando que tem mais para o lado */
-  .row::after {
-    content: "Arrasta para o lado ➔";
-    display: block;
-    color: #aaa;
-    font-size: 0.7rem;
-    text-align: right;
+  /* 4. Ajuste dos cards do Top 10 para combinar */
+  .card-container {
+    min-width: 110px !important;
+    height: 165px !important;
     margin-right: 15px;
-    margin-top: -5px;
-    opacity: 0.7;
   }
 
-  /* 8. Botão Comprar Agora */
-  .netflix-btn {
-    width: 90%;
-    font-size: 1rem;
-    padding: 12px;
+  .poster-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  /* 5. Números do Top 10 ajustados */
+  .rank-number {
+    font-size: 60px;
+    bottom: -10px;
+    left: -15px;
+  }
+
+  /* 6. Remove o indicador "Arrasta para o lado" */
+  .row::after {
+    display: none !important;
+  }
+
+  /* Ajuste de Banner para fechar o layout */
+  .banner { height: 40vh; }
+  #banner-title { font-size: 1.6rem; }
+  .banner-desc { display: none; }
+  
+  /* Esconde barra de rolagem mas mantém deslize */
+  .games-scroll::-webkit-scrollbar, 
+  .top-10-scroll::-webkit-scrollbar {
+    display: none;
   }
 }
