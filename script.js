@@ -55,37 +55,31 @@ window.addEventListener("DOMContentLoaded", ()=>{
   document.addEventListener("click", enableSound, {once:true});
 });
 
-/* --- LÓGICA DO MODAL (ESTILO NETFLIX) --- */
-function openModal(title, desc, trailerUrl) {
+/* --- LÓGICA DO MODAL (ESTILO NETFLIX COM YOUTUBE) --- */
+function openModal(title, desc, youtubeId) {
   const modal = document.getElementById("netflixModal");
-  const video = document.getElementById("modalVideo");
+  const iframe = document.getElementById("modalVideo");
 
-  // Preenche os textos dinamicamente
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalDesc").textContent = desc;
 
-  // Se o jogo tiver trailer, toca ele. Se não tiver, usa o do FarCry como padrão para não ficar tela preta.
-  video.src = trailerUrl ? trailerUrl : 'https://res.cloudinary.com/dlt1gqwnc/video/upload/v1771613996/farcry_z2rivm.mp4';
+  // Monta o link do YouTube escondendo os botões (controls=0) e a logo (modestbranding=1)
+  // O mute=1 é obrigatório para o autoplay=1 funcionar nos navegadores modernos
+  iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1`;
   
-  video.currentTime = 0;
-  video.play().catch(()=>{});
-
-  // Mostra o modal na tela
   modal.classList.add("active");
-  document.body.style.overflow = "hidden"; // Impede de rolar a página por trás do modal
+  document.body.style.overflow = "hidden";
 }
 
 function closeModal(){
   const modal = document.getElementById("netflixModal");
-  const video = document.getElementById("modalVideo");
+  const iframe = document.getElementById("modalVideo");
 
-  // Pausa e limpa o vídeo
-  video.pause();
-  video.src = "";
+  // Apaga o link do iframe para o vídeo parar de tocar no fundo
+  iframe.src = "";
 
-  // Esconde o modal
   modal.classList.remove("active");
-  document.body.style.overflow = ""; // Volta a permitir rolar a página
+  document.body.style.overflow = "";
 }
 
 /* Fecha o modal clicando fora dele (na parte escura) */
