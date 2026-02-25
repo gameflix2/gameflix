@@ -422,26 +422,52 @@ body {
   z-index: 10;
 }
 
-/* --- AJUSTE MOBILE REFINADO V2 - O ARSENAL DE GAMES --- */
+/* --- AJUSTE MOBILE REFINADO V3 - O ARSENAL DE GAMES --- */
 @media (max-width: 768px) {
 
-  /* 1. Ajuste dos Números Top 10 (Alinhados com a capa) */
+  /* 1. Ajuste do Banner Principal e Topo do Site */
+  .pinning-header { height: 60px; }
+  
+  /* Sobe o conteúdo inicial para evitar buracos no topo */
+  .banner { 
+    height: 35vh !important; 
+    margin-top: 0;
+  }
+
+  /* 2. Banner Black Friday com respiro agradável embaixo */
+  .top10-banner {
+    margin-bottom: 15px !important; /* Os 10% de espaço que você pediu */
+    margin-top: 10px;
+  }
+
+  /* 3. Títulos colados nos cards abaixo (Harmonizando o buraco) */
+  .row {
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+  }
+
+  .row h2 {
+    font-size: 1.1rem !important;
+    margin-bottom: 5px !important; /* Cola o título no card */
+    margin-top: 0px !important;
+    padding-left: 15px;
+  }
+
+  /* 4. Números e Cards do Top 10 (Ajuste de invasão) */
   .card-container {
     position: relative;
-    min-width: 32% !important; /* Ajuste para caber 3 com folga */
-    margin-right: 15px !important; /* Espaço para o número do próximo não invadir */
-    display: flex;
-    align-items: flex-end;
+    min-width: 32% !important;
+    margin-right: 18px !important; /* Aumentei um pouco para o número não bater no vizinho */
   }
 
   .rank-number {
-    font-size: 80px !important;
+    font-size: 85px !important;
     position: absolute !important;
     bottom: -15px !important;
-    left: -12px !important; /* Puxa o número levemente para fora da sua própria capa */
+    left: -15px !important;
     z-index: 1 !important;
     color: #141414 !important;
-    -webkit-text-stroke: 1.5px #999 !important;
+    -webkit-text-stroke: 1.5px #888 !important;
     letter-spacing: -8px;
   }
 
@@ -449,48 +475,25 @@ body {
     z-index: 2 !important;
     position: relative;
     width: 100% !important;
-    height: 150px !important;
+    height: 155px !important;
     object-fit: cover;
   }
 
-  /* 2. Colando a descrição no Banner Black Friday */
-  .top10-banner {
-    margin-bottom: 0px !important; /* Remove espaço abaixo do banner */
-  }
-
-  .row {
-    margin-top: 0px !important; 
-    padding-top: 5px !important;
-  }
-
-  .row h2 {
-    font-size: 1.1rem !important;
-    margin-top: 0px !important; /* Sobe o texto no limite */
-    margin-bottom: 10px !important;
-    padding-left: 10px;
-  }
-
-  /* 3. Centralizando os cards do Combo */
+  /* 5. Combo Centralizado e Vertical */
   .games-scroll {
     display: flex !important;
-    justify-content: flex-start; /* Mantém o início na esquerda mas com respiro */
     gap: 10px !important;
-    padding: 10px 15px !important;
+    padding: 5px 15px 20px 15px !important; /* Respiro embaixo para o botão comprar */
   }
 
   .game-card {
-    min-width: 30% !important; /* Mantém 3 por linha */
-    height: 155px !important;
+    min-width: 31% !important;
+    height: 160px !important;
     object-fit: cover !important;
     flex-shrink: 0;
   }
 
-  /* Ajuste do Banner Principal para não empurrar tudo */
-  .banner {
-    height: 38vh !important;
-  }
-
-  /* Remove barra de rolagem */
+  /* Esconde barras de rolagem */
   .games-scroll::-webkit-scrollbar, .top-10-scroll::-webkit-scrollbar {
     display: none;
   }
