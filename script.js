@@ -25,13 +25,22 @@ window.addEventListener('scroll', ()=>{
   }
 });
 
-/* --- CONTROLE DO VÍDEO DO BANNER --- */
+/* --- CONTROLE DO VÍDEO DO BANNER (LOOP INTELIGENTE) --- */
 window.addEventListener("DOMContentLoaded", ()=>{
   const bannerSection = document.getElementById("main-banner");
   const bannerVideo = document.getElementById("banner-video");
   if(!bannerVideo || !bannerSection) return;
 
-  // Para evitar bagunça de áudio, o som só ativa se clicar no banner
+  // 1. Removemos o loop padrão do HTML para o JavaScript assumir o controle
+  bannerVideo.removeAttribute("loop");
+
+  // 2. Quando o vídeo terminar, ele muta o som e começa de novo!
+  bannerVideo.addEventListener("ended", () => {
+    bannerVideo.muted = true; // Fica mudo
+    bannerVideo.play().catch(()=>{}); // Recomeça o vídeo
+  });
+
+  // 3. Clique no banner para ligar/desligar o som manualmente, se o usuário quiser
   bannerSection.addEventListener("click", ()=>{
     if(bannerVideo.muted){
       bannerVideo.muted = false;
@@ -74,7 +83,7 @@ function closeModal(){
   modal.classList.remove("active");
   document.body.style.overflow = "";
 
-  // Volta a rodar o vídeo de fundo, mas MUTADO para os sons não brigarem
+  // Volta a rodar o vídeo de fundo, mas MUTADO para não atrapalhar a paz
   if(bannerVideo) {
     bannerVideo.muted = true;
     bannerVideo.play().catch(()=>{});
