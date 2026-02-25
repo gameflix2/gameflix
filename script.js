@@ -66,7 +66,8 @@ function openModal(title, desc, youtubeId) {
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalDesc").textContent = desc;
 
-  iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1`;
+  // MÁGICA AQUI: adicionei &start=10 no final do link!
+  iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1&start=10`;
   
   modal.classList.add("active");
   document.body.style.overflow = "hidden";
