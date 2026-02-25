@@ -422,68 +422,58 @@ body {
   z-index: 10;
 }
 
-/* --- AJUSTE MOBILE REFINADO V3 - O ARSENAL DE GAMES --- */
+/* --- AJUSTE MOBILE FINAL - PADRÃO NETFLIX --- */
 @media (max-width: 768px) {
 
-  /* 1. Ajuste do Banner Principal e Topo do Site */
-  .pinning-header { height: 60px; }
-  
-  /* Sobe o conteúdo inicial para evitar buracos no topo */
-  .banner { 
-    height: 35vh !important; 
-    margin-top: 0;
-  }
-
-  /* 2. Banner Black Friday com respiro agradável embaixo */
+  /* 1. Equalizando as Distâncias (Banner -> Descrição -> Cards) */
   .top10-banner {
-    margin-bottom: 15px !important; /* Os 10% de espaço que você pediu */
-    margin-top: 10px;
-  }
-
-  /* 3. Títulos colados nos cards abaixo (Harmonizando o buraco) */
-  .row {
-    margin-top: 0px !important;
-    padding-top: 0px !important;
+    margin-bottom: 20px !important; /* Distância do banner para a frase */
   }
 
   .row h2 {
     font-size: 1.1rem !important;
-    margin-bottom: 5px !important; /* Cola o título no card */
     margin-top: 0px !important;
+    margin-bottom: 20px !important; /* Mesma distância da frase para os cards */
     padding-left: 15px;
   }
 
-  /* 4. Números e Cards do Top 10 (Ajuste de invasão) */
+  /* 2. Números Estilo Netflix (Exatamente como na foto) */
   .card-container {
     position: relative;
-    min-width: 32% !important;
-    margin-right: 18px !important; /* Aumentei um pouco para o número não bater no vizinho */
+    min-width: 45% !important; /* Aumentei um pouco para o número brilhar */
+    margin-right: 5px !important;
+    display: flex;
+    align-items: center;
+    overflow: visible; /* Garante que o número apareça */
   }
 
   .rank-number {
-    font-size: 85px !important;
+    font-size: 160px !important; /* Gigante como na foto */
+    font-family: 'Bebas Neue', sans-serif;
     position: absolute !important;
-    bottom: -15px !important;
-    left: -15px !important;
-    z-index: 1 !important;
-    color: #141414 !important;
-    -webkit-text-stroke: 1.5px #888 !important;
-    letter-spacing: -8px;
+    left: -25px !important; /* Fica bem para a esquerda */
+    z-index: 1 !important; /* Atrás da foto */
+    color: transparent !important; /* Fundo transparente */
+    -webkit-text-stroke: 2px #555 !important; /* Contorno cinza escuro da foto */
+    font-weight: bold;
+    line-height: 1;
   }
 
   .poster-img {
-    z-index: 2 !important;
+    z-index: 2 !important; /* Na frente do número */
     position: relative;
     width: 100% !important;
-    height: 155px !important;
+    height: 180px !important; /* Um pouco mais alto para combinar com o número */
     object-fit: cover;
+    margin-left: 35px; /* Empurra a foto para a direita para revelar o número atrás */
+    border-radius: 4px;
   }
 
-  /* 5. Combo Centralizado e Vertical */
+  /* 3. Combo de Jogos (Ajuste de centralização) */
   .games-scroll {
     display: flex !important;
-    gap: 10px !important;
-    padding: 5px 15px 20px 15px !important; /* Respiro embaixo para o botão comprar */
+    gap: 12px !important;
+    padding: 10px 15px !important;
   }
 
   .game-card {
@@ -492,6 +482,9 @@ body {
     object-fit: cover !important;
     flex-shrink: 0;
   }
+
+  /* Banner Principal */
+  .banner { height: 35vh !important; }
 
   /* Esconde barras de rolagem */
   .games-scroll::-webkit-scrollbar, .top-10-scroll::-webkit-scrollbar {
