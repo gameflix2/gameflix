@@ -167,6 +167,12 @@
       <span class="modal-close" onclick="closeModal()">×</span>
       <iframe id="modalVideo" class="modal-video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       <div class="modal-info">
+        <div class="modal-actions" style="margin-top: 20px; display: flex; gap: 10px;">
+  <button class="btn-add-list" onclick="toggleMinhaLista()" style="background: transparent; border: 1px solid #fff; color: #fff; padding: 10px 20px; border-radius: 4px; cursor: pointer;">
+    + Minha Lista
+  </button>
+  <button style="background: transparent; border: 1px solid #fff; color: #fff; padding: 10px; border-radius: 50%; width: 45px; height: 45px;">👍</button>
+</div>
         <h2 id="modalTitle"></h2>
         <p id="modalDesc"></p>
       </div>
@@ -176,3 +182,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
