@@ -1,48 +1,25 @@
-/* --- SCROLL DO TOP 10 --- */
-const top10 = document.getElementById('top10');
-
-function scrollLeft(){
-  top10.scrollBy({ left: -600, behavior: "smooth" });
+function mudarBanner(titulo, desc, video) {
+  document.getElementById('banner-title').textContent = titulo;
+  document.getElementById('banner-desc').textContent = desc;
+  const vid = document.getElementById('banner-video');
+  vid.src = video;
+  vid.load();
+  vid.play();
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-function scrollRight(){
-  top10.scrollBy({ left: 600, behavior: "smooth" });
+function openModal(t, d, id) {
+  const m = document.getElementById('netflixModal');
+  document.getElementById('modalTitle').textContent = t;
+  document.getElementById('modalDesc').textContent = d;
+  document.getElementById('modalVideo').src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+  m.classList.add('active');
 }
 
-/* --- MUDAR BANNER E SUBIR --- */
-function mudarBanner(titulo, descricao, videoUrl) {
-  const bannerTitle = document.getElementById('banner-title');
-  const bannerDesc = document.getElementById('banner-desc');
-  const bannerVideo = document.getElementById('banner-video');
-
-  bannerTitle.textContent = titulo;
-  bannerDesc.textContent = descricao;
-  bannerVideo.src = videoUrl;
-  
-  bannerVideo.load();
-  bannerVideo.play();
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function closeModal() {
+  document.getElementById('netflixModal').classList.remove('active');
+  document.getElementById('modalVideo').src = "";
 }
 
-/* --- HEADER DINÂMICO --- */
-window.addEventListener('scroll', ()=>{
-  const header = document.getElementById('header');
-  header.style.background = window.scrollY > 50 ? 'rgba(20,20,20,0.95)' : 'linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, transparent)';
-});
-
-/* --- MODAL --- */
-function openModal(title, desc, youtubeId) {
-  const modal = document.getElementById("netflixModal");
-  const iframe = document.getElementById("modalVideo");
-  document.getElementById("modalTitle").textContent = title;
-  document.getElementById("modalDesc").textContent = desc;
-  iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1`;
-  modal.classList.add("active");
-}
-
-function closeModal(){
-  const modal = document.getElementById("netflixModal");
-  document.getElementById("modalVideo").src = "";
-  modal.classList.remove("active");
-}
+function scrollRight() { document.getElementById('top10').scrollBy({left: 400, behavior: 'smooth'}); }
+function scrollLeft() { document.getElementById('top10').scrollBy({left: -400, behavior: 'smooth'}); }
