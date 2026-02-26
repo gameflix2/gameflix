@@ -8,7 +8,7 @@ body {
   margin: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-color: var(--bg-dark);
-  color: #fff;MADIA
+  color: #fff;
 
   
   overflow-x: hidden;
@@ -500,5 +500,6 @@ body {
     display: none;
   }
 }
+
 
 
