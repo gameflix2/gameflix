@@ -1,93 +1,98 @@
-/* --- CONTROLE DE ROLAGEM DO TOP 10 --- */
+/* --- SCROLL INTELIGENTE DO TOP 10 --- */
 const top10 = document.getElementById('top10');
 
-function scrollLeft() {
-    if (top10) {
-        // Rola o equivalente a 2 cards para a esquerda
-        top10.scrollBy({ left: -500, behavior: "smooth" });
-    }
+function scrollLeft(){
+  if(!top10) return;
+  const card = top10.querySelector(".card-container");
+  if(!card) return;
+  top10.scrollBy({ left: -(card.offsetWidth + 45) * 2, behavior: "smooth" });
 }
 
-function scrollRight() {
-    if (top10) {
-        // Rola o equivalente a 2 cards para a direita
-        top10.scrollBy({ left: 500, behavior: "smooth" });
-    }
-}
-
-/* --- FUNÇÃO PARA MUDAR O BANNER (JOGOS GRÁTIS) --- */
-function mudarBanner(titulo, descricao, videoUrl) {
-    const bannerTitle = document.getElementById('banner-title');
-    const bannerDesc = document.getElementById('banner-desc');
-    const bannerVideo = document.getElementById('banner-video');
-
-    if (bannerTitle && bannerDesc && bannerVideo) {
-        // Atualiza os textos
-        bannerTitle.textContent = titulo;
-        bannerDesc.textContent = descricao;
-
-        // Atualiza o vídeo e inicia o play
-        bannerVideo.src = videoUrl;
-        bannerVideo.load();
-        bannerVideo.play().catch(error => {
-            console.log("O autoplay foi bloqueado ou o vídeo falhou:", error);
-        });
-
-        // Sobe a página para o topo suavemente para ver o trailer
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-}
-
-/* --- LÓGICA DO MODAL (TRAILERS DO YOUTUBE) --- */
-function openModal(title, desc, youtubeId) {
-    const modal = document.getElementById("netflixModal");
-    const iframe = document.getElementById("modalVideo");
-    const bannerVideo = document.getElementById('banner-video');
-
-    // Pausa o vídeo do banner para não ficar dois áudios tocando
-    if (bannerVideo) bannerVideo.pause();
-
-    document.getElementById("modalTitle").textContent = title;
-    document.getElementById("modalDesc").textContent = desc;
-
-    // Link do YouTube com autoplay e mudo (para garantir que inicie)
-    iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=0&modestbranding=1&rel=0`;
-    
-    modal.classList.add("active");
-    document.body.style.overflow = "hidden"; // Trava o scroll da página com modal aberto
-}
-
-function closeModal() {
-    const modal = document.getElementById("netflixModal");
-    const iframe = document.getElementById("modalVideo");
-    const bannerVideo = document.getElementById('banner-video');
-
-    // Limpa o link do vídeo para parar o som imediatamente
-    iframe.src = "";
-    
-    modal.classList.remove("active");
-    document.body.style.overflow = ""; // Libera o scroll da página
-
-    // Volta a tocar o vídeo do banner
-    if (bannerVideo) bannerVideo.play().catch(() => {});
+function scrollRight(){
+  if(!top10) return;
+  const card = top10.querySelector(".card-container");
+  if(!card) return;
+  top10.scrollBy({ left: (card.offsetWidth + 45) * 2, behavior: "smooth" });
 }
 
 /* --- EFEITO DO HEADER NO SCROLL --- */
-window.addEventListener('scroll', () => {
-    const header = document.getElementById('header');
-    if (window.scrollY > 50) {
-        header.style.background = 'rgba(20, 20, 20, 0.95)';
-        header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.5)';
-    } else {
-        header.style.background = 'linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, transparent)';
-        header.style.boxShadow = 'none';
-    }
+window.addEventListener('scroll', ()=>{
+  const header = document.getElementById('header');
+  if(window.scrollY > 50) {
+    header.style.background = 'rgba(20,20,20,0.95)';
+  } else {
+    header.style.background = 'linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, transparent)';
+  }
 });
 
-/* FECHAR MODAL CLICANDO FORA */
-window.onclick = function(event) {
-    const modal = document.getElementById("netflixModal");
-    if (event.target == modal) {
-        closeModal();
+/* --- CONTROLE DO VÍDEO DO BANNER (LOOP INTELIGENTE) --- */
+window.addEventListener("DOMContentLoaded", ()=>{
+  const bannerSection = document.getElementById("main-banner");
+  const bannerVideo = document.getElementById("banner-video");
+  if(!bannerVideo || !bannerSection) return;
+
+  // 1. Removemos o loop padrão do HTML para o JavaScript assumir o controle
+  bannerVideo.removeAttribute("loop");
+
+  // 2. Quando o vídeo terminar, ele muta o som e começa de novo!
+  bannerVideo.addEventListener("ended", () => {
+    bannerVideo.muted = true; // Fica mudo
+    bannerVideo.play().catch(()=>{}); // Recomeça o vídeo
+  });
+
+  // 3. Clique no banner para ligar/desligar o som manualmente, se o usuário quiser
+  bannerSection.addEventListener("click", ()=>{
+    if(bannerVideo.muted){
+      bannerVideo.muted = false;
+      bannerVideo.volume = 0.3; // Volume agradável
+    } else {
+      bannerVideo.muted = true;
     }
-};
+  });
+});
+
+/* --- LÓGICA DO MODAL (ESTILO NETFLIX COM YOUTUBE) --- */
+function openModal(title, desc, youtubeId) {
+  const modal = document.getElementById("netflixModal");
+  const iframe = document.getElementById("modalVideo");
+  const bannerVideo = document.getElementById("banner-video");
+
+  // PAUSA E MUTA O VÍDEO DE FUNDO À FORÇA!
+  if(bannerVideo) {
+    bannerVideo.pause();
+    bannerVideo.muted = true; 
+  }
+
+  document.getElementById("modalTitle").textContent = title;
+  document.getElementById("modalDesc").textContent = desc;
+
+  // MÁGICA AQUI: adicionei &start=10 no final do link!
+  iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1&start=10`;
+  
+  modal.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal(){
+  const modal = document.getElementById("netflixModal");
+  const iframe = document.getElementById("modalVideo");
+  const bannerVideo = document.getElementById("banner-video");
+
+  // Remove o vídeo do YouTube para ele parar de tocar
+  iframe.src = "";
+
+  modal.classList.remove("active");
+  document.body.style.overflow = "";
+
+  // Volta a rodar o vídeo de fundo, mas MUTADO para não atrapalhar a paz
+  if(bannerVideo) {
+    bannerVideo.muted = true;
+    bannerVideo.play().catch(()=>{});
+  }
+}
+
+/* Fecha o modal clicando fora dele (na parte escura) */
+document.getElementById("netflixModal").addEventListener("click", e => {
+  if(e.target.id === "netflixModal") closeModal();
+});
+
