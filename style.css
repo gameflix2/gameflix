@@ -9,9 +9,20 @@ body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-color: var(--bg-dark);
   color: #fff;
-
-  
   overflow-x: hidden;
+}
+
+/* --- EFEITO DE CARREGAMENTO (SKELETON) --- */
+/* Isso faz com que os cards pulsem antes das imagens carregarem */
+.game-card, .poster-img {
+  background: linear-gradient(90deg, #141414 25%, #222 50%, #141414 75%);
+  background-size: 200% 100%;
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 /* --- HEADER --- */
@@ -153,7 +164,7 @@ body {
   cursor: pointer;
 }
 
-/* --- TOP 10 ROW --- */
+/* --- ROW TOP 10 --- */
 .row {
   padding: 20px 4%;
   margin-top: -50px;
@@ -175,7 +186,7 @@ body {
   display: flex;
   gap: 45px;
   overflow-x: auto;
-  padding: 20px 0;
+  padding: 40px 0; /* Espaço para o zoom não cortar */
   scrollbar-width: none;
   scroll-behavior: smooth;
 }
@@ -189,11 +200,17 @@ body {
   display: flex;
   align-items: flex-end;
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+/* Efeito Netflix: Quem ganha hover cresce, os outros apagam um pouco */
+.top-10-scroll:hover .card-container:not(:hover) {
+  opacity: 0.5;
 }
 
 .card-container:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
+  z-index: 10;
 }
 
 .rank-number {
@@ -233,7 +250,7 @@ body {
   text-transform: uppercase;
 }
 
-/* Setas de navegação */
+/* --- SETAS --- */
 .arrow-left, .arrow-right {
   position: absolute;
   top: 50%;
@@ -243,7 +260,7 @@ body {
   color: #fff;
   font-size: 2rem;
   cursor: pointer;
-  z-index: 10;
+  z-index: 100;
   border-radius: 50%;
   width: 40px;
   height: 60px;
@@ -252,23 +269,12 @@ body {
 .arrow-left { left: 5px; }
 .arrow-right { right: 5px; }
 
-@media(max-width:768px){
-  .banner-content h1 { font-size: 2rem; }
-  .banner-content p { font-size: 14px; }
-  .poster-img { width: 100px; height: 150px; margin-left: 50px; }
-  .rank-number { font-size: clamp(60px, 25vw, 120px); left: -10px; bottom: -15px; }
-  .arrow-left, .arrow-right { width: 30px; height: 50px; font-size: 1.5rem; }
-}
-
-/* ROW normal jogos */
+/* --- ROW JOGOS COMBO --- */
 .games-scroll {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-}
-
-.games-scroll::-webkit-scrollbar{
-  display:none;
+  padding: 40px 0;
 }
 
 .game-card {
@@ -277,14 +283,20 @@ body {
   object-fit: cover;
   border-radius: 4px;
   cursor: pointer;
-  transition: transform .3s;
+  transition: transform 0.4s ease, opacity 0.3s ease;
 }
 
-.game-card:hover{
-  transform:scale(1.08);
+.games-scroll:hover .game-card:not(:hover) {
+  opacity: 0.5;
 }
 
-/* BOTÃO COMPRAR AGORA - Estilo Futurista Neon */
+.game-card:hover {
+  transform: scale(1.1);
+  z-index: 10;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+}
+
+/* --- BOTÃO COMPRAR AGORA --- */
 .netflix-btn {
   display: inline-block;
   padding: 22px 55px;
@@ -304,7 +316,6 @@ body {
   animation: float 2.5s ease-in-out infinite;
 }
 
-/* Glow animado */
 .netflix-btn::before {
   content: "";
   position: absolute;
@@ -323,9 +334,9 @@ body {
   100% { transform: rotate(360deg); }
 }
 
-.netflix-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px #ff0000, 0 0 30px #ff3b3b, 0 0 40px #ff3b3b;
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.05); }
 }
 
 .floating-btn-container {
@@ -335,24 +346,18 @@ body {
   z-index: 10;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-6px) scale(1.05); }
-}
-
-/* FAIXAS DE DESTAQUE */
-.faixa-destaque{
-  font-family:'Bebas Neue', sans-serif;
-  color:#fff;
-  text-align:center;
-  padding:24px 40px;
-  font-size:36px;
+/* --- FAIXAS --- */
+.faixa-destaque {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #fff;
+  text-align: center;
+  padding: 24px 40px;
+  font-size: 36px;
 }
 
 .top10-banner {
   display: flex;
   justify-content: center;
-  margin-top: -0px; 
   margin-bottom: 110px;
 }
 
@@ -362,7 +367,7 @@ body {
   border-radius: 8px;
 }
 
-/* ===== MODAL NETFLIX STYLE ===== */
+/* --- MODAL --- */
 .netflix-modal {
   position: fixed;
   inset: 0;
@@ -373,9 +378,7 @@ body {
   z-index: 9999;
 }
 
-.netflix-modal.active {
-  display: flex;
-}
+.netflix-modal.active { display: flex; }
 
 .modal-content {
   width: 90%;
@@ -385,6 +388,7 @@ body {
   overflow: hidden;
   box-shadow: 0 0 40px rgba(0,0,0,0.8);
   animation: modalFade .3s ease;
+  position: relative;
 }
 
 @keyframes modalFade {
@@ -395,24 +399,13 @@ body {
 .modal-video {
   width: 100%;
   height: 480px;
-  object-fit: cover;
+  border: none;
   background: #000;
 }
 
-.modal-info {
-  padding: 20px;
-}
-
-.modal-info h2 {
-  margin: 0 0 10px;
-  font-size: 28px;
-}
-
-.modal-info p {
-  color: #ccc;
-  font-size: 16px;
-  line-height: 1.4;
-}
+.modal-info { padding: 20px; }
+.modal-info h2 { margin: 0 0 10px; font-size: 28px; }
+.modal-info p { color: #ccc; font-size: 16px; line-height: 1.4; }
 
 .modal-close {
   position: absolute;
@@ -424,82 +417,23 @@ body {
   z-index: 10;
 }
 
-/* --- AJUSTE MOBILE REFINADO V3 - O ARSENAL DE GAMES --- */
+/* --- MOBILE --- */
 @media (max-width: 768px) {
-
-  /* 1. Ajuste do Banner Principal e Topo do Site */
-  .pinning-header { height: 60px; }
+  .banner { height: 35vh !important; }
+  .top10-banner { margin-bottom: 15px !important; margin-top: 10px; }
+  .row { margin-top: 0px !important; }
+  .row h2 { font-size: 1.1rem !important; margin-bottom: 20px !important; padding-left: 15px; }
   
-  /* Sobe o conteúdo inicial para evitar buracos no topo */
-  .banner { 
-    height: 35vh !important; 
-    margin-top: 0;
-  }
-
-  /* 2. Banner Black Friday com respiro agradável embaixo */
-  .top10-banner {
-    margin-bottom: 15px !important; /* Os 10% de espaço que você pediu */
-    margin-top: 10px;
-  }
-
-  /* 3. Títulos colados nos cards abaixo (Harmonizando o buraco) */
-  .row {
-    margin-top: 0px !important;
-    padding-top: 0px !important;
-  }
-
-  .row h2 {
-    font-size: 1.1rem !important;
-    margin-bottom: 20px !important; /* Cola o título no card */
-    margin-top: 0px !important;
-    padding-left: 15px;
-  }
-
-  /* 4. Números e Cards do Top 10 (Ajuste de invasão) */
-  .card-container {
-    position: relative;
-    min-width: 32% !important;
-    margin-right: 18px !important; /* Aumentei um pouco para o número não bater no vizinho */
-  }
-
-  .rank-number {
-    font-size: 85px !important;
-    position: absolute !important;
-    bottom: -15px !important;
-    left: -15px !important;
-    z-index: 1 !important;
-    color: #141414 !important;
+  .card-container { min-width: 32% !important; margin-right: 18px !important; }
+  .rank-number { 
+    font-size: 85px !important; 
+    bottom: -15px !important; 
+    left: -15px !important; 
     -webkit-text-stroke: 1.5px #888 !important;
     letter-spacing: -8px;
   }
+  .poster-img { width: 100% !important; height: 155px !important; margin-left: 40px; }
 
-  .poster-img {
-    z-index: 2 !important;
-    position: relative;
-    width: 100% !important;
-    height: 155px !important;
-    object-fit: cover;
-  }
-
-  /* 5. Combo Centralizado e Vertical */
-  .games-scroll {
-    display: flex !important;
-    gap: 10px !important;
-    padding: 5px 15px 20px 15px !important; /* Respiro embaixo para o botão comprar */
-  }
-
-  .game-card {
-    min-width: 31% !important;
-    height: 160px !important;
-    object-fit: cover !important;
-    flex-shrink: 0;
-  }
-
-  /* Esconde barras de rolagem */
-  .games-scroll::-webkit-scrollbar, .top-10-scroll::-webkit-scrollbar {
-    display: none;
-  }
+  .games-scroll { gap: 10px !important; padding: 5px 15px !important; }
+  .game-card { min-width: 31% !important; height: 160px !important; }
 }
-
-
-
