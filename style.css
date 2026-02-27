@@ -1,13 +1,13 @@
 :root {
   --netflix-red: #e50914;
-  --bg-dark: #141414;
+  --bg-dark: #000000; /* Antes era #141414 (cinza escuro) */
   --text-gray: #a3a3a3;
 }
 
 body {
   margin: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: var(--bg-dark);
+  background-color: #000000;
   color: #fff;MADIA
 
   
@@ -77,16 +77,15 @@ body {
   cursor: pointer;
 }
 
-/* --- BANNER --- */
 .banner {
-  height: 80vh;
+  height: 100vh;
   display: flex;
-  align-items: center;
-  padding: 0 4%;
+  align-items: flex-end; /* Alinha o conteúdo no fundo */
+  padding: 0 4% 120px 4%; /* O 120px garante que o texto não fique 'colado' no chão */
   position: relative;
   overflow: hidden;
+  margin-bottom: 0px !important;
 }
-
 .banner-video {
   position: absolute;
   inset: 0;
@@ -99,11 +98,13 @@ body {
 .banner::after {
   content: '';
   position: absolute;
-  bottom: 0; left: 0; width: 100%; height: 150px;
-  background: linear-gradient(to top, var(--bg-dark), transparent);
+  bottom: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 60px; /* Diminuído para apenas 60px para ser um corte seco e elegante */
+  background: linear-gradient(to top, #000000, transparent);
   z-index: 1;
 }
-
 .banner::before {
   content: "";
   position: absolute;
@@ -116,6 +117,7 @@ body {
   max-width: 600px;
   position: relative;
   z-index: 2;
+  margin-bottom: 20px; /* Ajuste fino para a altura dos botões */
 }
 
 .banner-content h1 {
@@ -153,13 +155,7 @@ body {
   cursor: pointer;
 }
 
-/* --- TOP 10 ROW --- */
-.row {
-  padding: 20px 4%;
-  margin-top: -50px;
-  position: relative;
-  z-index: 5;
-}
+
 
 .row h2 {
   font-size: 1.4vw;
@@ -360,8 +356,22 @@ body {
   max-width: 90%;
   height: auto;
   border-radius: 8px;
-}
+  display: block;
 
+  /* Máscara horizontal: começa transparente na esquerda e fica sólida rapidamente */
+  -webkit-mask-image: linear-gradient(
+    to right, 
+    transparent 0%, 
+    black 15%, 
+    black 100%
+  );
+  mask-image: linear-gradient(
+    to right, 
+    transparent 0%, 
+    black 15%, 
+    black 100%
+  );
+}
 /* ===== MODAL NETFLIX STYLE ===== */
 .netflix-modal {
   position: fixed;
@@ -499,6 +509,386 @@ body {
   .games-scroll::-webkit-scrollbar, .top-10-scroll::-webkit-scrollbar {
     display: none;
   }
+}
+/* Definição da Animação */
+@keyframes subirSuave {
+  from {
+    opacity: 0;
+    transform: translateY(30px); /* Começa 30px abaixo */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* Termina na posição original */
+  }
+}
+
+/* Aplicando a animação ao conteúdo do banner */
+.banner-content {
+  max-width: 600px;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 20px;
+  
+  /* Configurações da animação */
+  animation: subirSuave 1s ease-out forwards;
+  opacity: 0; /* Começa invisível até a animação iniciar */
+}
+
+/* Opcional: Pequeno atraso para os botões aparecerem depois do título */
+.banner-content h1 {
+  animation: subirSuave 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.banner-content p {
+  animation: subirSuave 0.8s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+.banner-content a, .btn-info {
+  display: inline-block; /* Garante que a animação funcione bem nos botões */
+  animation: subirSuave 0.8s ease-out 0.6s forwards;
+  opacity: 0;
+}
+/* ===== ESTILOS DA TELA DE SPLASH GAMEFLIX ===== */
+#splash-screen {
+  position: fixed;
+  inset: 0;
+  background-color: #000; /* Fundo preto absoluto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000; /* Fica acima de tudo (header, banner, etc.) */
+  overflow: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+/* Container do conteúdo para centralizar */
+.splash-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- O Texto Principal (GAMEFLIX) --- */
+.splash-text {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #e50914; /* Vermelho Netflix */
+  font-size: 5rem; /* Tamanho grande inicial */
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  
+  /* Aplica a animação de Zoom, Desfoque e Cores */
+  animation: gameflix-intro 3.5s ease-out forwards;
+}
+
+/* --- Camadas de Cores Extras (Aberração Cromática) --- */
+.splash-shadow-r, .splash-shadow-b {
+  position: absolute;
+  inset: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  opacity: 0;
+  z-index: 1;
+}
+
+/* Camada Vermelha Atômica (Direita) */
+.splash-shadow-r {
+  color: #ff0000;
+  animation: shadow-r 3.5s ease-out forwards;
+}
+
+/* Camada Azul/Ciano (Esquerda) */
+.splash-shadow-b {
+  color: #00ffff;
+  animation: shadow-b 3.5s ease-out forwards;
+}
+
+/* === DEFINIÇÃO DAS ANIMAÇÕES (KEYFRAMES) === */
+
+/* 1. Animação Principal: Zoom e Desfoque do Texto */
+@keyframes gameflix-intro {
+  0% {
+    transform: scale(0.6); /* Começa menor */
+    filter: blur(5px); /* Bem desfocado */
+    opacity: 0;
+  }
+  15% {
+    transform: scale(1.1); /* Zoom rápido (efeito de impacto) */
+    filter: blur(0px); /* Fica nítido */
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.1); /* Mantém o tamanho e nitidez */
+    filter: blur(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(10); /* Zoom GIGANTE (passa pela tela) */
+    filter: blur(30px); /* Desfoca muito no final */
+    opacity: 0; /* Some */
+  }
+}
+
+/* 2. Animação da Camada Vermelha (Se desfaz para a direita) */
+@keyframes shadow-r {
+  0%, 15% { opacity: 0; transform: translateX(0); }
+  20% { opacity: 1; transform: translateX(10px) scale(1.1); filter: blur(2px); }
+  100% { opacity: 0; transform: translateX(150px) scale(15); filter: blur(30px); }
+}
+
+/* 3. Animação da Camada Ciano (Se desfaz para a esquerda) */
+@keyframes shadow-b {
+  0%, 15% { opacity: 0; transform: translateX(0); }
+  20% { opacity: 1; transform: translateX(-10px) scale(1.1); filter: blur(2px); }
+  100% { opacity: 0; transform: translateX(-150px) scale(15); filter: blur(30px); }
+}
+
+/* Classe para esconder a splash screen no final */
+#splash-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none; /* Garante que o usuário possa clicar no site */
+}
+
+/* Ajuste Responsivo para Mobile */
+@media (max-width: 768px) {
+  .splash-text { font-size: 2.5rem; }
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #444;
+    padding: 5px 10px;
+    border-radius: 4px;
+~  transition: all 0.3s;
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    outline: none;
+    width: 0; /* Começa fechada */
+    transition: width 0.4s;
+    font-size: 14px;
+}
+
+/* Quando passar o mouse ou focar, ela abre */
+.search-box:hover input, .search-box input:focus {
+    width: 200px;
+    margin-right: 10px;
+}
+
+.search-box button {
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+}
+/* --- RODAPÉ ESTILO NETFLIX REAL --- */
+.footer {
+  background-color: #000;
+  color: #757575; /* Cinza clássico da Netflix */
+  padding: 50px 4% 20px;
+  font-size: 13px;
+  margin-top: 50px;
+}
+
+.footer-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.footer-contact {
+  margin-bottom: 30px;
+}
+
+.footer-contact a {
+  color: #757575;
+  text-decoration: none;
+}
+
+.footer-contact a:hover {
+  text-decoration: underline;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colunas iguais */
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.footer-column {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column li {
+  margin-bottom: 12px;
+}
+
+.footer-column a {
+  color: #757575;
+  text-decoration: none;
+}
+
+.footer-column a:hover {
+  text-decoration: underline;
+}
+
+.footer-country {
+  font-size: 11px;
+}
+
+/* Ajuste para celular */
+@media (max-width: 768px) {
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas no mobile */
+  }
+}
+/* --- ESTILO DA TELA DE LOGIN --- */
+#login-screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+              url('https://assets.nflxext.com/ffe/siteui/vlv3/f841d4c7-10e1-40af-bca1-07e3f8eb14af/60a92d3f-5835-43a0-98ef-66b976c1233f/BR-pt-20220502-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 50000; /* Garante que fica na frente de tudo */
+  display: flex;
+  flex-direction: column;
+}
+
+.login-header { padding: 25px 50px; }
+
+.login-box {
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 60px;
+  width: 100%;
+  max-width: 450px;
+  margin: auto;
+  border-radius: 8px;
+}
+
+.login-box h1 { margin-bottom: 28px; font-size: 32px; }
+
+.input-group { margin-bottom: 16px; }
+
+/* --- AJUSTE DOS CAMPOS DE LOGIN --- */
+.login-box .input-group input {
+  width: 100%;
+  padding: 16px;
+  background-color: #333 !important; /* O !important garante que o branco não volte */
+  border: none;
+  border-radius: 4px;
+  color: #ffffff; /* Letras brancas ao digitar */
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box; /* Evita que o campo 'escape' da caixa */
+}
+
+/* Cor do texto de exemplo (Email/Senha) */
+.login-box .input-group input::placeholder {
+  color: #8c8c8c;
+}
+
+/* Quando o usuário clica para digitar (Foco) */
+.login-box .input-group input:focus {
+  background-color: #454545 !important;
+  box-shadow: 0 1px 0 var(--netflix-red); /* Linha vermelha discreta embaixo ao focar */
+}
+
+/* Remove o fundo amarelo/branco que o Chrome coloca automaticamente no preenchimento automático */
+.login-box .input-group input:-webkit-autofill,
+.login-box .input-group input:-webkit-autofill:hover, 
+.login-box .input-group input:-webkit-autofill:focus {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px #333 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.btn-login-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--netflix-red);
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 24px;
+}
+
+.login-help {
+  display: flex;
+  justify-content: space-between;
+  color: #b3b3b3;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.login-footer-info { margin-top: 40px; color: #737373; }
+.login-footer-info a { color: white; text-decoration: none; }
+
+/* Classe para esconder a tela após login */
+#login-screen.hidden { display: none; }
+
+/* Ajuste da Logo do Banner */
+#banner-logo {
+    width: 100%;
+    max-width: 300px; /* Define o tamanho máximo da logo */
+    height: auto;
+    margin-bottom: 15px;
+    display: block;
+    /* Esse filtro faz a logo "saltar" do vídeo, dando profundidade */
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.9)); 
+}
+
+/* Ajuste para telas menores (Celular) */
+@media (max-width: 768px) {
+    #banner-logo {
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+#banner-logo {
+    width: 100%;
+    max-width: 350px; /* Tamanho ideal para desktop */
+    height: auto;
+    margin-bottom: 10px;
+    display: block;
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.8)); /* Faz a logo se destacar do vídeo */
+}
+
+/* Para ficar bonito no celular */
+@media (max-width: 768px) {
+    #banner-logo {
+        max-width: 220px;
+        margin: 0 auto 15px auto; /* Centraliza no mobile */
+    }
+    .banner-content {
+        text-align: center; /* Centraliza o texto no mobile */
+    }
+}
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 
