@@ -150,7 +150,7 @@ loginForm.addEventListener('submit', function(e) {
 
   // DEFINA AQUI O EMAIL E SENHA QUE VOCÊ QUER
   const emailCorreto = "testegratis@gameflix.com";
-  const senhaCorreta = "thiarlesgay";
+  const senhaCorreta = "a";
 
   if (emailInput === emailCorreto && passwordInput === senhaCorreta) {
     // Esconde a tela de login
@@ -196,4 +196,5 @@ window.addEventListener('click', function(event) {
     if (event.target === modalWpp) closeWppModal();
     if (event.target === modalNetflix) closeModal();
 });
+
 
