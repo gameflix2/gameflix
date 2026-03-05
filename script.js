@@ -53,6 +53,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
 
 function openModal(title, desc, videoSrc) {
   const modal = document.getElementById("netflixModal");
+  const modalContent = modal.querySelector(".modal-content");
   const iframe = document.getElementById("modalVideo");
   const bannerVideo = document.getElementById("banner-video");
 
@@ -65,22 +66,19 @@ function openModal(title, desc, videoSrc) {
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalDesc").textContent = desc;
 
-  // LÓGICA DE DETECÇÃO: YouTube ou Link Direto (Cloudinary)
+  // LÓGICA DE VÍDEO (Mantendo sua estrutura original)
   if (videoSrc.includes("youtube.com") || videoSrc.includes("youtu.be") || videoSrc.length < 15) {
-    // Se for um ID curto ou link do YT, usa o Iframe
     const youtubeId = videoSrc.includes("v=") ? videoSrc.split("v=")[1] : videoSrc;
-    iframe.style.display = "block";
     iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=0&controls=1&rel=0`;
-    
-    // Esconde um possível player de vídeo comum se você decidir adicionar um depois
   } else {
-    // Se for link do Cloudinary (.mp4), vamos transformar o iframe em um player de vídeo
-    // DICA: Para simplicidade extrema, você pode abrir o link direto no iframe, 
-    // mas o ideal para o Cloudinary é que o link termine em .mp4
-    iframe.style.display = "block";
     iframe.src = videoSrc; 
   }
   
+  // --- EFEITO AMBILIGHT MASTER ---
+  // Aplica um brilho neon baseado na identidade visual da GAMEFLIX (Vermelho)
+  // ou você pode personalizar por jogo aqui
+  modalContent.style.boxShadow = "0 0 80px rgba(229, 9, 20, 0.6)";
+
   modal.classList.add("active");
   document.body.style.overflow = "hidden";
 }
@@ -108,34 +106,48 @@ document.getElementById("netflixModal").addEventListener("click", e => {
   if(e.target.id === "netflixModal") closeModal();
 });
 
+/* --- LÓGICA DE TROCA DO BANNER PARA JOGOS GRÁTIS --- */
 document.querySelectorAll('.free-game-trigger').forEach(card => {
   card.addEventListener('click', function() {
-    // 1. Coleta os dados novos
+    // 1. Coleta os dados dos atributos 'data-' do card clicado
     const novaLogo = this.getAttribute('data-logo');
     const novaDesc = this.getAttribute('data-desc');
     const novoVideo = this.getAttribute('data-video');
     const novoLink = this.getAttribute('data-link');
 
-    // 2. Atualiza a LOGO e a DESCRIÇÃO
+    // 2. Atualiza a LOGO e a DESCRIÇÃO no banner
     const imgLogo = document.getElementById('banner-logo');
-    if (imgLogo) {
-      imgLogo.src = novaLogo;
-    }
-    document.getElementById('banner-desc').textContent = novaDesc;
+    if (imgLogo) imgLogo.src = novaLogo;
     
-    // 3. Atualiza o VÍDEO
+    const descElement = document.getElementById('banner-desc');
+    if (descElement) descElement.textContent = novaDesc;
+    
+    // 3. Atualiza e dá play no VÍDEO de fundo
     const videoElement = document.getElementById('banner-video');
-    videoElement.src = novoVideo;
-    videoElement.load(); // Força o carregamento do novo vídeo
-    videoElement.play();
-
-    // 4. Atualiza o Botão de Download
-    const downloadBtn = document.querySelector('.banner-content a');
-    if (downloadBtn) {
-      downloadBtn.href = novoLink;
+    if (videoElement) {
+      videoElement.src = novoVideo;
+      videoElement.load(); 
+      videoElement.play().catch(()=>{});
     }
 
-    // 5. Sobe para o topo
+    // 4. ATUALIZA O BOTÃO PARA "DOWNLOAD GRATIS"
+    const actionBtn = document.getElementById('btn-main-action');
+    const downloadAnchor = document.getElementById('banner-link');
+    
+    if (actionBtn) {
+      // Aqui mudamos o texto visualmente
+      actionBtn.innerHTML = "▶ DOWNLOAD GRATIS"; 
+      // Garante que ele use o estilo de botão principal (branco)
+      actionBtn.className = "btn-play"; 
+    }
+    
+    if (downloadAnchor) {
+      // Define o link de download e força o navegador a baixar
+      downloadAnchor.href = novoLink;
+      downloadAnchor.setAttribute('download', 'game-gameflix'); 
+    }
+
+    // 5. Sobe a página suavemente para o topo para mostrar o banner trocado
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
@@ -166,29 +178,24 @@ loginForm.addEventListener('submit', function(e) {
   }
 });
 
-/* --- AJUSTE EXCLUSIVO PARA O POPUP WHATSAPP (MODAL NOVO) --- */
+/* --- AJUSTE EXCLUSIVO PARA O POPUP WHATSAPP --- */
 function openWppModal() {
   const modalWpp = document.getElementById("wppModal");
-  const bannerVideo = document.getElementById("banner-video");
-  
   if(modalWpp) {
       modalWpp.style.display = "flex";
       document.body.style.overflow = "hidden";
+      document.body.classList.add('modal-open'); // Aplica o desfoque do CSS
   }
-  if(bannerVideo) bannerVideo.pause();
 }
 
 function closeWppModal() {
   const modalWpp = document.getElementById("wppModal");
-  const bannerVideo = document.getElementById("banner-video");
-
   if(modalWpp) {
       modalWpp.style.display = "none";
       document.body.style.overflow = "auto";
+      document.body.classList.remove('modal-open'); // Remove o desfoque
   }
-  if(bannerVideo) bannerVideo.play().catch(()=>{});
 }
-
 /* FECHAR MODAIS CLICANDO FORA */
 window.addEventListener('click', function(event) {
     const modalWpp = document.getElementById("wppModal");
@@ -196,5 +203,6 @@ window.addEventListener('click', function(event) {
     if (event.target === modalWpp) closeWppModal();
     if (event.target === modalNetflix) closeModal();
 });
+
 
 
