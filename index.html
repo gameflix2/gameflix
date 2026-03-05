@@ -35,9 +35,9 @@
     </form>
 
     <div class="login-footer-info">
-      <p>Novo por aqui? <a href="#">Assine agora.</a></p>
+      <p>Novo por aqui? <a href="javascript:void(0)" onclick="openWppModal()" style="color: #e50914; font-weight: bold; text-decoration: none;">FAÇA UM TESTE GRATIS.</a></p>
       <p class="captcha-text">
-        Esta página é protegida pelo Google reCAPTCHA.
+        clique no botao para gerar um QRCODE 
       </p>
     </div>
   </div>
@@ -70,11 +70,14 @@
     </video>
    <div class="banner-content">
   <img src="https://cdn2.steamgriddb.com/logo/4c25257cc0a490730dee6fe6a528accc.png" id="banner-logo" alt="Logo do Jogo">
+  
   <p id="banner-desc">BF6 ocupa o top 1 da Gameflix como o jogo mais baixado da plataforma!</p>
-  <a href="https://drivee.google.com/uc?export=download&id=1jCvhMNka9U0hJv2NqioXyS3xWGLbI9nQ" download>
-    <button class="btn-play">▶ DOWNLOAD GRATIS</button>
+  
+  <a href="#" id="banner-link">
+    <button class="btn-play" id="btn-main-action">ⓘ MAIS INFORMAÇÕES</button>
   </a>
-  <button class="btn-info">ⓘ Mais informações</button>
+  
+  <button class="btn-info"> + Minha Lista</button>
 </div>
   </section>
 
@@ -441,20 +444,26 @@ TODO SITE COM 70% DE DESCONTO - OFERTA DE LANÇAMENTO! - SOMENTE ATE O FIM DESSE
     <div class="modal-wpp-content">
         <span class="close-wpp" onclick="closeWppModal()">&times;</span>
         
-        <h2>TODO SITE COM 70% DE DESCONTO</h2>
+        <h2>SOLICITE SEU LOGIN PARA TESTE</h2>
+        <p>Aponte a câmera pegue seu acesso gratuito via WhatsApp!</p>
         
-        <p>OFERTA EXCLUSIVA DE LANÇAMENTO...  
-          Entre no grupo Oficial da Gameflix para GANHAR!!</p>
+        <div style="background: white; padding: 10px; display: inline-block; border-radius: 10px; margin-bottom: 20px;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/5553981045078?text=Olá!%20Vim%20pelo%20site%20da%20Gameflix%20e%20quero%20fazer%20o%20teste%20grátis." 
+               alt="QR Code WhatsApp" style="width: 180px; height: 180px; display: block;">
+        </div>
         
-        <a href="https://wa.me/5553981045078?text=Olá! Estava navegando na Gameflix e gostaria de de entrar no grupo 70% OFF." target="_blank" class="btn-wpp">
+        <br>
+
+        <a href="https://wa.me/5553981045078?text=Olá! Vim pelo site da Gameflix e quero fazer o teste grátis." target="_blank" class="btn-wpp">
             <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon">
-            GRUPO GAMEFLIX 70% OFF AQUI
+            ABRIR WHATSAPP WEB
         </a>
     </div>
 </div>
 
 </body>
 </html>
+
 
 
 
